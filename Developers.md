@@ -1,0 +1,1 @@
+- Conventional commit and change log management https://github.com/conventional-changelog/conventional-changelog
