@@ -7,7 +7,7 @@ const excludedLinks = [];
 links.forEach((link) => {
     if (link.href.includes(location.host)) {
         filteredLinks.push(link.href);
-        // highlightLink(link);
+        highlightLink(link);
         appendButton(link);
     } else {
         excludedLinks.push(link.href);
@@ -18,9 +18,9 @@ links.forEach((link) => {
 // console.log(excludedLinks);
 
 
-// function highlightLink(link) {
-//     link.setAttribute('style', 'color: grey');
-// }
+function highlightLink(link) {
+    link.setAttribute('style', 'color: grey');
+}
 
 function appendButton(link) {
     console.log(link.href)
