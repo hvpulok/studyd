@@ -1,6 +1,6 @@
 {
-  "name": "Study Tracker",
-  "version": "1.0",
+  "name": "Studyd",
+  "version": "1.0.0",
   "description": "Track your study progress",
   "permissions": [
     "storage",
