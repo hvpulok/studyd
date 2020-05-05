@@ -1,5 +1,5 @@
 import './w3schools.scss';
-import removeIframe from '../common/iframe-remover';
+import IframeRemover from '../common/iframe-remover';
 
 /**
  * It should save last active link
@@ -16,7 +16,7 @@ export default class W3SchoolTracker {
         console.log('w3-school tracker initialized');
     }
 
-    public track() {
+    public track(isRemoveIframe = true) {
         this.links.forEach((link: any) => {
             if (link.href.includes(location.host)) {
                 this.filteredLinks.push(link.href);
@@ -26,11 +26,9 @@ export default class W3SchoolTracker {
                 this.excludedLinks.push(link.href);
             }
         });
-        const intervalID = setInterval(() => removeIframe(), 3000);
-        setTimeout(() => {
-            console.log('Cleaning interval', intervalID);
-            clearInterval(intervalID);
-        }, 22000);
+        if (isRemoveIframe) {
+            new IframeRemover().removeIframe();
+        }
     }
 
 

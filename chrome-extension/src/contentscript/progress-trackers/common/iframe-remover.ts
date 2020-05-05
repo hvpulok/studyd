@@ -1,26 +1,25 @@
-export default function removeIframe() {
-    console.log('Removing iframes');
-    document.querySelectorAll('iframe').forEach(iframe => {
-        try {
-            removeRootParent(iframe);
-        } catch (error) { }
-    });
-}
+export default class IframeRemover {
+    constructor(private attemptIntervalTime = 5000, private attemptTimeout = 25000) { }
 
-function removeRootParent(node: HTMLElement, baseSize?: number, previousNode?: HTMLElement) {
-    const currentSize = node && node.clientHeight + node.clientWidth;
-    baseSize = baseSize || currentSize;
-    // console.log('------------------------------');
-    // console.log('checking for iframe parent', node);
-    // console.log('baseSize', baseSize);
-    // console.log('currentSize', currentSize);
-    if (currentSize - baseSize > 200) {
-        // console.log('Found parent. Removing it', previousNode);
-        previousNode.remove();
-    } else {
-        removeRootParent(node.parentElement, baseSize, node);
+    removeIframe() {
+        const intervalID = setInterval(() => {
+            // console.log('Removing iframe');
+            document.querySelectorAll('iframe').forEach(iframe => {
+                this._removeRootParent(iframe);
+            });
+        }, this.attemptIntervalTime);
+
+        setTimeout(() => clearInterval(intervalID), this.attemptTimeout);
     }
-    // console.log('------------------------------');
+
+    private _removeRootParent(node: HTMLElement) {
+        const candidate = node.parentElement;
+        if (candidate.childElementCount >= 2) {
+            // console.log('found parent')
+            // console.log(node)
+            node.remove();
+        } else {
+            this._removeRootParent(candidate)
+        }
+    }
 }
-
-
