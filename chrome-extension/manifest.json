@@ -1,11 +1,36 @@
 {
+  "manifest_version": 2,
   "name": "Studyd",
+  "short_name": "Studyd",
   "version": "1.0.0",
   "description": "Track your study progress",
   "permissions": [
+    "tabs",
+    "activeTab",
     "storage",
-    "declarativeContent",
-    "activeTab"
+    "declarativeContent"
+  ],
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Studyd"
+  },
+  "icons": {
+    "128": "./assets/icon.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "contentscript.js"
+      ],
+      "css": [
+        "contentscript.css"
+      ],
+      "matches": [
+        "*://*.w3schools.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
   ],
   "background": {
     "scripts": [
@@ -13,32 +38,5 @@
     ],
     "persistent": false
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*.w3schools.com/*"
-      ],
-      "all_frames": true,
-      "run_at": "document_end",
-      "js": [
-        "tracker.js"
-      ]
-    }
-  ],
-  "page_action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "images/get_started16.png",
-      "32": "images/get_started32.png",
-      "48": "images/get_started48.png",
-      "128": "images/get_started128.png"
-    }
-  },
-  "icons": {
-    "16": "images/get_started16.png",
-    "32": "images/get_started32.png",
-    "48": "images/get_started48.png",
-    "128": "images/get_started128.png"
-  },
-  "manifest_version": 2
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
