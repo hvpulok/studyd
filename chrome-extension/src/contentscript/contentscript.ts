@@ -1,5 +1,5 @@
 import './contentscript.scss';
-import W3SchoolTracker from './progress-trackers/w3-schools';
+import W3SchoolTracker from './progress-trackers/w3schools/w3-schools';
 
 const isThisContentscript = true;
 console.log('isThisContentscript', isThisContentscript);

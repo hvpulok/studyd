@@ -1,3 +1,6 @@
+import './w3schools.scss';
+import removeIframe from '../common/iframe-remover';
+
 /**
  * It should save last active link
  * It should append button to toggle as read/complete
@@ -23,7 +26,13 @@ export default class W3SchoolTracker {
                 this.excludedLinks.push(link.href);
             }
         });
+        const intervalID = setInterval(() => removeIframe(), 3000);
+        setTimeout(() => {
+            console.log('Cleaning interval', intervalID);
+            clearInterval(intervalID);
+        }, 22000);
     }
+
 
     // console.log(filteredLinks);
     // console.log(excludedLinks);
